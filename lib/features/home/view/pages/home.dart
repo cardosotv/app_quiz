@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              userScore("Your Score: ", loggedUser, myWidht: maxWidth),
+              userScore("Score: ", loggedUser, myWidht: maxWidth),
             ],
           ),
           // Row(
