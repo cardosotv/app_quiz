@@ -26,8 +26,8 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(33, 150, 243, 1),
         title: const Text(
-          "Quiz App",
-          style: TextStyle(fontSize: 14),
+          "App - Quiz",
+          style: TextStyle(fontSize: 14, color: Colors.white),
           textDirection: TextDirection.ltr,
         ),
       ),
