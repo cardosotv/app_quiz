@@ -21,7 +21,8 @@ Widget userScore(String title, User user, {double myWidht = 200, double  myHeigh
           alignment: AlignmentDirectional.centerStart,
           child: Text(
             title, 
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold,
+                                    fontSize: 24),
           ),
           ),
           Align(
