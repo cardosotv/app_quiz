@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(33, 150, 243, 1),
         title: const Text(
-          "App - Quiz - v0",
+          "Quiz IA",
           style: TextStyle(fontSize: 16, 
                            color: Colors.white,
                            fontWeight: FontWeight.bold
@@ -43,12 +43,7 @@ class _HomeState extends State<Home> {
               userScore("Score: ", loggedUser, myWidht: maxWidth),
             ],
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children:[
               optionSubject(context),
-          //   ],
-          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

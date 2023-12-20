@@ -1,12 +1,12 @@
+import 'package:app_quiz/features/home/domain/entities/entity_subjects.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/quiz_answer/domain/models/quiz.dart';
 import 'package:app_quiz/core/domain/use_cases/utils.dart';
 
-Widget buttonPageOption (String option, BuildContext context, { double myWidth = 100, double myHeight = 100 }){
+Widget buttonPageOption (Subject option, BuildContext context, { double myWidth = 100, double myHeight = 100 }){
   return GestureDetector(
     onTap: () {
-      print("The user pressioned the option $option");
-      Navigator.pushNamed(context, '/quiz', arguments: Quiz(id: 8, name:option, about:"About123"));
+      print("The user pressioned the option ${option.subject}");
+      Navigator.pushNamed(context, '/quiz', arguments: option);
       resetGlobarVar();
     },
     child: Container(
@@ -28,7 +28,7 @@ Widget buttonPageOption (String option, BuildContext context, { double myWidth =
           Align(
             alignment: AlignmentDirectional.bottomCenter,
             child: Text(
-              option,
+              option.subject,
               style: const TextStyle(fontSize: 12, color: Color.fromARGB(137, 10, 9, 9)),
             ),
           ),
