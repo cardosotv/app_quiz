@@ -40,7 +40,11 @@ class _HomeState extends State<Home> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              userScore("Score: ", loggedUser, myWidht: maxWidth),
+              Card(
+                elevation: 1,
+                margin: const EdgeInsets.only(top:15, bottom: 15),
+                child: userScore("Score: ", loggedUser, myWidht: maxWidth-20),
+                ),
             ],
           ),
               optionSubject(context),
@@ -48,7 +52,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 50.0),
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Container(
                   alignment: Alignment.center,
                   width: maxWidth,

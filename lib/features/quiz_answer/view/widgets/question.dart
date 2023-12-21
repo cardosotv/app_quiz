@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 Widget widgetQuestion(String question, {double myWidht=200.0, double myHeight=100.0}) {
   return Card(
       elevation: 1,
-      margin: const EdgeInsets.only(top: 40.0),
+      //margin: const EdgeInsets.only(top: 20.0),
       color: const Color.fromARGB(255, 223, 241, 250),
       child: Container(
           padding: const EdgeInsets.all(15.0),

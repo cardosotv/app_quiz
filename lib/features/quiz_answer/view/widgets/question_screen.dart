@@ -26,42 +26,47 @@ class QuestionOptions extends StatelessWidget {
 
     return Container(
       height: maxHeight,
-      alignment: Alignment.topLeft,
+      alignment: Alignment.center,
       child: BlocConsumer<QuestionCubit, QuestionState>(
         listener: (context, state) {
           // TODO: implement listener
         },
         builder: (context, state) {
           return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  widgetQuestion(questionCubit.question.question,
-                      myWidht: maxWidth - 50, myHeight: 150),
-                ],
+              Container(
+                alignment: Alignment.center,
+                child:  widgetQuestion(questionCubit.question.question,
+                        myWidht: maxWidth - 50, myHeight: 180),
               ),
               Container(
                   alignment: Alignment.topLeft,
                   child:
                       _widgetOptions(context, questionCubit.question.options)),
               Container(
-                margin: const EdgeInsets.only(bottom: 80),
-                child: ElevatedButton(
-                  onPressed: questionCubit.userAnswer == ""
-                      ? null
-                      : () => {
-                            questionCubit.setAnswerQuestion(),
-                            if (questionCubit.randomList.isNotEmpty){
-                              questionCubit.getNextQuestion(),
-                            } else {
-                              Navigator.pushNamed(context, 
-                                                  '/questionResult',
-                                                  arguments: questionCubit.listAnswers),
-                            }
-                          },
-                  child: const Text("Next"),
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 20),
+                child: SizedBox(
+                  width: 150,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: questionCubit.userAnswer == ""
+                        ? null
+                        : () => {
+                              questionCubit.setAnswerQuestion(),
+                              if (questionCubit.randomList.isNotEmpty){
+                              //if (questionCubit.randomList.length > 9) {
+                                questionCubit.getNextQuestion(),
+                              } else {
+                                questionCubit.calculateQuizScore(),
+                                Navigator.pushNamed(context, 
+                                                    '/questionResult',
+                                                    arguments: questionCubit),
+                              }
+                            },
+                    child: const Text("Next"),
+                  ),
                 ),
               ),
             ],
@@ -81,7 +86,7 @@ class QuestionOptions extends StatelessWidget {
       builder: (context, state) {
         return Container(
           width: MediaQuery.of(context).size.width-50,
-          margin: EdgeInsets.only(left: 20),
+          margin: const EdgeInsets.only(top: 40, left: 20),
           child: ListView.builder(
               scrollDirection: Axis.vertical,
                    shrinkWrap: true,
@@ -97,7 +102,6 @@ class QuestionOptions extends StatelessWidget {
                           title: Text(options[index]),
                           onTap: (){
                             questionCubit.setOptionSelected(options[index]);
-                            print(options[index]);
                           },
                         ),
                       );

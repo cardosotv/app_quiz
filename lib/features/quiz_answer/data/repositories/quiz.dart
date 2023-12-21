@@ -1,48 +1,72 @@
 List<Map<String, dynamic>> repositorieQuiz = [
   {
-    "id": "1",
-    "subject": "Celebrities1",
-    "about": "Celebrities Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
+    "id": 1,
+    "subject": "Celebrities",
+    "about":
+        "Test your knowledge of famous personalities from the entertainment world.",
+    "icon": 0xe7fd
   },
   {
-    "id": "2",
-    "subject": "Movies2",
-    "about": "Movies Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
+    "id": 2,
+    "subject": "Movies",
+    "about":
+        "Explore the world of cinema and identify iconic movies, actors, and directors.",
+    "icon": 0xe333
   },
   {
-    "id": "3",
-    "subject": "News3",
-    "about": "News Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
-  },
-    {
-    "id": "4",
+    "id": 3,
     "subject": "History",
-    "about": "History Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
+    "about":
+        "Travel through time and answer questions about historical events and figures.",
+    "icon": 0xe777
   },
   {
-    "id": "5",
-    "subject": "Songs",
-    "about": "Songs Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
-  },
-  {
-    "id": "6",
+    "id": 4,
     "subject": "Science",
-    "about": "Science Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
-  },
-    {
-    "id": "7",
-    "subject": "History7",
-    "about": "History7 Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
+    "about":
+        "Dive into the fascinating world of science and test your knowledge of various scientific disciplines.",
+    "icon": 0xea4e
   },
   {
-    "id": "8",
-    "subject": "Songs8",
-    "about": "Songs8 Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
+    "id": 5,
+    "subject": "Music",
+    "about":
+        "Identify songs, artists, and genres from various musical eras in this exciting music quiz.",
+    "icon": 0xe405
+  },
+  // {
+  //   "id": 6,
+  //   "subject": "Geography",
+  //   "about":
+  //       "Test your knowledge of countries, capitals, and landmarks from around the world.",
+  //   "icon": 0xe55f
+  // },
+  {
+    "id": 7,
+    "subject": "Sports",
+    "about":
+        "Challenge yourself with questions about different sports, athletes, and championships.",
+    "icon": 0xe7c9
   },
   {
-    "id": "9",
-    "subject": "Science9",
-    "about": "Science9 Lorem ipsum dolor sit amet. Aut libero pariatur est dolorem sunt qui cumque tenetur et ipsam dolores aut consectetur corporis? At dolores possimus et voluptas architecto ab cupiditate assumenda."
+    "id": 8,
+    "subject": "Technology",
+    "about":
+        "Stay updated with the latest in technology and answer questions about gadgets and innovations.",
+    "icon": 0xe324
+  },
+  {
+    "id": 9,
+    "subject": "Art",
+    "about":
+        "Appreciate the world of art by identifying famous paintings, artists, and art movements.",
+    "icon": 0xe40e
+  },
+  {
+    "id": 10,
+    "subject": "Food",
+    "about":
+        "Satisfy your appetite for knowledge by answering questions about cuisines, ingredients, and culinary traditions.",
+    "icon": 0xe578
   }
 ];
-

@@ -28,7 +28,7 @@ class _QuizMainQuestionState extends State<QuizMainQuestion> {
       home: Scaffold(
           appBar: AppBar(
            title: const Text(
-            "Quiz",
+            " ",
             textDirection: TextDirection.ltr,
           ),
         ),
@@ -36,44 +36,65 @@ class _QuizMainQuestionState extends State<QuizMainQuestion> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  height: 100,
-                  child: Text(
-                    parameters.subject,
-                    style: const TextStyle(
-                      fontSize: 36,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
+                  margin: EdgeInsets.only(top: 40),
+                  height: 150,
+                  child: Column(
+                    children: [
+                      Icon( 
+                        IconData(parameters.icon, fontFamily: "MaterialIcons"),
+                        color: Colors.blue,
+                        size: 82,
+                      ),
+                      Text(
+                        parameters.subject,
+                        style: const TextStyle(
+                          fontSize: 32,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Card(
+                  elevation: 1,
+                  margin: const EdgeInsets.all(15.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(18.0),
+                    //                width: 300,
+                    height: 200,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 223, 241, 250),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      parameters.about,
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(18.0),
-                  //                width: 300,
-                  height: 300,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 223, 241, 250),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    parameters.about,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
                 SizedBox(
-                  height: 300,
+                  height: 250,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
+                       SizedBox(
+                        width: 150,
+                        height: 50,
+                        child: ElevatedButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text("<< Back"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context , QuestionSelected.routeName);
-                        },
-                        child: const Text("<<Start>>"),
+                        child: const Text("Back"),
+                      ), ),
+                      SizedBox(
+                        width: 150,
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context , QuestionSelected.routeName);
+                          },
+                          child: const Text("Start"),
+                        ),
                       ),
                     ],
                   ),

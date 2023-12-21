@@ -16,37 +16,49 @@ class QuestionSelected extends StatefulWidget {
 
 class _QuestionSelected extends State<QuestionSelected> {
   int timerCounter = 0;
-  double score = 0.0;
   int indexQuestion = 0;
-  List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
   Timer? oclock;
+  var questionCubit = QuestionCubit();
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
-        create: (context) => QuestionCubit(),
-        child: Scaffold(
-          appBar: AppBar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () => {
-                    Navigator.pushNamed(context, Home.routeName),
-                  },
-                  child: const Text("quit"),
-                ),
-                Text(
-                  "Question 1/10",
-                  textDirection: TextDirection.ltr,
-                ),
-              ],
-            ),
+      create: (context) => QuestionCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () => {
+                  Navigator.pushNamed(context, Home.routeName),
+                },
+                child: const Text("quit", 
+                                  style: TextStyle(color: Colors.blue),),
+              ),
+              BlocBuilder<QuestionCubit, QuestionState>(
+                builder: (context, state) {
+                  questionCubit = context.read<QuestionCubit>();
+                  return Text(
+                    "${questionCubit.listAnswers.length+1}/10",
+                    textDirection: TextDirection.ltr,
+                    style: const TextStyle(color: Colors.blue),
+                  );
+                },
+              ),
+              const Text(" "),
+            ],
           ),
-          body: QuestionOptions(),
         ),
-      );
+        body: Container(
+                margin: const EdgeInsets.only(top: 50.0),
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height,
+                child: QuestionOptions(),
+                ),
+      ),
+    );
   }
 }
 

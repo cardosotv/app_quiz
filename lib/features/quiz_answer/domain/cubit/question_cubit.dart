@@ -12,28 +12,24 @@ class QuestionCubit extends Cubit<QuestionState> {
   Question question = Question();
   List<Answer> listAnswers = [];
   String userAnswer = "";
+  var resultMatch = {'score': 0, 'hits':'0/10', 'emoji':'#'};
+  double matchScore = 0.0;
   List randomList = indexListQuestion;
   QuestionCubit() : super(QuestionEmpty());
-
-
 
   Future<void> getNextQuestion() async {
 // purpose: return de next question to show for user
 // 1. set a random list
 // 2. remove this index of the random list
 // 3.  delivery the question for the next index of random list 
-    
     emit(QuestionLoading());
     userAnswer = "";
     List<int> listSuffle = randomList as List<int>; 
     listSuffle.shuffle();
-    print(randomList.toString());
     int nextIndex = listSuffle[0];
     question = QuestionModel().getId(nextIndex);
     randomList.remove(nextIndex);
     emit(QuestionLoaded());
-    print(randomList.toString());
-    print(nextIndex);
   }
 
   Future<void> setOptionSelected(String optionSelected) async {
@@ -52,7 +48,6 @@ class QuestionCubit extends Cubit<QuestionState> {
   // 3. Register the answer
 
     bool answerCorrect = userAnswer == question.correctAnswer ? true : false;
-
     listAnswers.add(
       Answer(questionId: question.id,
              answer: userAnswer,
@@ -62,4 +57,15 @@ class QuestionCubit extends Cubit<QuestionState> {
              )
     );
   }
+
+  Future<void> calculateQuizScore() async{
+  // purpose: This function should calculate the match score.
+  // 1. sum the result of each match 
+  // 2. add the score of match to user score.
+    for (Answer answer in listAnswers) {
+      matchScore = matchScore + answer.score;
+    } 
+    resultMatch['score'] = matchScore;
+    loggedUser.score += loggedUser.score + matchScore.toInt(); 
+  } 
 }
