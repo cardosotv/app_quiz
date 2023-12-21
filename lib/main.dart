@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           Home.routeName: (context) => const Home(),
           QuizMainQuestion.routeName: (context) => const QuizMainQuestion(),
-          QuestionResult.routeName: (context) => const QuestionResult(),
+          '/questionResult': (context) => const QuestionResult(),
           QuestionSelected.routeName: (context) => const QuestionSelected()
         },
       );

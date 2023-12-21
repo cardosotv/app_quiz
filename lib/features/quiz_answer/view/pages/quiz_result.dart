@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/quiz_answer/domain/models/answer.dart';
+import 'package:app_quiz/features/quiz_answer/domain/entities/answer_entity.dart';
 import 'package:app_quiz/features/home/view/pages/home.dart';
 import 'package:app_quiz/core/data/repositories/global_var.dart';
 

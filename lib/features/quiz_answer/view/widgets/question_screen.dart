@@ -1,4 +1,5 @@
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
+import 'package:app_quiz/features/quiz_answer/view/pages/quiz_result.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/quiz_answer/view/widgets/question.dart';
 import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
@@ -52,8 +53,13 @@ class QuestionOptions extends StatelessWidget {
                       ? null
                       : () => {
                             questionCubit.setAnswerQuestion(),
-                            questionCubit.getNextQuestion(),
-                            print(questionCubit.userAnswer),
+                            if (questionCubit.randomList.isNotEmpty){
+                              questionCubit.getNextQuestion(),
+                            } else {
+                              Navigator.pushNamed(context, 
+                                                  '/questionResult',
+                                                  arguments: questionCubit.listAnswers),
+                            }
                           },
                   child: const Text("Next"),
                 ),

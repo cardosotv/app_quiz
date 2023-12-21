@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
 import 'package:app_quiz/features/quiz_answer/view/widgets/question_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
 import 'package:app_quiz/features/home/view/pages/home.dart';
-import 'package:app_quiz/core/data/repositories/global_var.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class QuestionSelected extends StatefulWidget {
@@ -20,16 +18,13 @@ class _QuestionSelected extends State<QuestionSelected> {
   int timerCounter = 0;
   double score = 0.0;
   int indexQuestion = 0;
-  List<Question> listQuestion = [];
   List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
   Timer? oclock;
 
   @override
   Widget build(BuildContext context) {
-    //var parameters = ModalRoute.of(context)!.settings.arguments as Question;
 
-    return MaterialApp(
-      home: BlocProvider(
+    return BlocProvider(
         create: (context) => QuestionCubit(),
         child: Scaffold(
           appBar: AppBar(
@@ -43,7 +38,7 @@ class _QuestionSelected extends State<QuestionSelected> {
                   child: const Text("quit"),
                 ),
                 Text(
-                  "Question ${listAnswers.length + 1}/10",
+                  "Question 1/10",
                   textDirection: TextDirection.ltr,
                 ),
               ],
@@ -51,8 +46,7 @@ class _QuestionSelected extends State<QuestionSelected> {
           ),
           body: QuestionOptions(),
         ),
-      ),
-    );
+      );
   }
 }
 

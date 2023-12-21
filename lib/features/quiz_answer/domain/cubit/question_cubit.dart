@@ -4,14 +4,12 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:app_quiz/core/data/repositories/global_var.dart';
 import 'package:app_quiz/features/quiz_answer/domain/entities/answer_entity.dart';
-import 'dart:math';
 
 part 'question_state.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {
   // set up here any var that we have
   Question question = Question();
-  String abc = " ";
   List<Answer> listAnswers = [];
   String userAnswer = "";
   List randomList = indexListQuestion;
@@ -24,14 +22,18 @@ class QuestionCubit extends Cubit<QuestionState> {
 // 1. set a random list
 // 2. remove this index of the random list
 // 3.  delivery the question for the next index of random list 
+    
     emit(QuestionLoading());
     userAnswer = "";
-    int nextIndex = Random().nextInt(randomList.length-1)+1;
-    randomList.remove(nextIndex);
-// need adjust for null result 
-    emit(QuestionLoaded());
+    List<int> listSuffle = randomList as List<int>; 
+    listSuffle.shuffle();
+    print(randomList.toString());
+    int nextIndex = listSuffle[0];
     question = QuestionModel().getId(nextIndex);
-    abc = "abc";
+    randomList.remove(nextIndex);
+    emit(QuestionLoaded());
+    print(randomList.toString());
+    print(nextIndex);
   }
 
   Future<void> setOptionSelected(String optionSelected) async {
