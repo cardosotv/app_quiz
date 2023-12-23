@@ -55,8 +55,8 @@ class QuestionOptions extends StatelessWidget {
                         ? null
                         : () => {
                               questionCubit.setAnswerQuestion(),
-                              if (questionCubit.randomList.isNotEmpty){
-                              //if (questionCubit.randomList.length > 9) {
+                              //if (questionCubit.randomList.isNotEmpty){
+                              if (questionCubit.randomList.length > 9) {
                                 questionCubit.getNextQuestion(),
                               } else {
                                 questionCubit.calculateQuizScore(),

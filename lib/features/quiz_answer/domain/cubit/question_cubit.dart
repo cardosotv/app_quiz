@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:app_quiz/core/data/repositories/global_var.dart';
 import 'package:app_quiz/features/quiz_answer/domain/entities/answer_entity.dart';
-
+import 'package:flutter/material.dart';
 part 'question_state.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {
@@ -12,7 +12,12 @@ class QuestionCubit extends Cubit<QuestionState> {
   Question question = Question();
   List<Answer> listAnswers = [];
   String userAnswer = "";
-  var resultMatch = {'score': 0, 'hits':'0/10', 'emoji':'#'};
+  var resultMatch = {'score': 0, 
+                      'hits': 0,
+                      'emoji':'#',
+                      'message': ' ',
+                      'subMessage': ' '
+                    };
   double matchScore = 0.0;
   List randomList = indexListQuestion;
   QuestionCubit() : super(QuestionEmpty());
@@ -41,7 +46,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(QuestionAnswered());
   }
 
-  Future<void> setAnswerQuestion({int time = 5}) async {
+  Future<void> setAnswerQuestion({int time = 1}) async {
   // purpose: set the user answer identifying if the answer was correct and calculating the score
   // 1. identifying if the answer was correct
   // 2. Calculate the score
@@ -62,10 +67,46 @@ class QuestionCubit extends Cubit<QuestionState> {
   // purpose: This function should calculate the match score.
   // 1. sum the result of each match 
   // 2. add the score of match to user score.
+    int hits=0;
     for (Answer answer in listAnswers) {
       matchScore = matchScore + answer.score;
+      hits = hits + (answer.correct ? 1 : 0);
     } 
     resultMatch['score'] = matchScore;
+    resultMatch['hits'] = hits;
+    if(matchScore > 850){
+      resultMatch['message'] = "You are the best!";
+      resultMatch['subMessage'] = "This match was absolutely phenomenal.";
+      resultMatch['emoji'] = "🏆";
+    }
+    else if(matchScore > 700){
+      resultMatch['message'] = "Congratulations!";
+      resultMatch['subMessage'] = "You are really good.";
+      resultMatch['emoji'] = "🎉";    
+      }
+    else if(matchScore > 500){
+      resultMatch['message'] = "Good effort!";
+      resultMatch['subMessage'] = "You are on the right trackt.";
+      resultMatch['emoji'] = "👏";    
+    }
+    else if(matchScore > 300){
+      resultMatch['message'] = "It's a stumble!";
+      resultMatch['subMessage'] = "Keep your head up, there's always room for improvement.";
+      resultMatch['emoji'] = "😬";    
+    }
+    else {
+      resultMatch['message'] = "Terrible!";
+      resultMatch['subMessage'] = "Improve your self and get back in the game.";
+      resultMatch['emoji'] = "😱";    
+    
+    }
+    //  'message': ' ',
+    //  'color_score': ' '
     loggedUser.score += loggedUser.score + matchScore.toInt(); 
+  }
+
+  Widget widgetResult() {
+    
+    return Container();
   } 
 }
