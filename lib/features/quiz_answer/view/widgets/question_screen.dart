@@ -1,8 +1,6 @@
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
-import 'package:app_quiz/features/quiz_answer/view/pages/quiz_result.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/quiz_answer/view/widgets/question.dart';
-import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
@@ -23,7 +21,6 @@ class QuestionOptions extends StatelessWidget {
       questionCubit.getNextQuestion();
       isfristLoad = false;
     } 
-
     return Container(
       height: maxHeight,
       alignment: Alignment.center,
@@ -56,13 +53,14 @@ class QuestionOptions extends StatelessWidget {
                         : () => {
                               questionCubit.setAnswerQuestion(),
                               //if (questionCubit.randomList.isNotEmpty){
-                              if (questionCubit.randomList.length > 9) {
+                              if (questionCubit.randomList.length > 8) {
                                 questionCubit.getNextQuestion(),
                               } else {
                                 questionCubit.calculateQuizScore(),
                                 Navigator.pushNamed(context, 
                                                     '/questionResult',
                                                     arguments: questionCubit),
+                                questionCubit.close(),
                               }
                             },
                     child: const Text("Next"),

@@ -1,4 +1,5 @@
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
+import 'package:app_quiz/features/quiz_answer/view/pages/quiz_question.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/home/view/pages/home.dart';
 
@@ -104,7 +105,7 @@ class _QuestionResultState extends State<QuestionResult> {
                    height: 50,
                     child: ElevatedButton(
                       onPressed: () { 
-                          Navigator.pushNamed(context, Home.routeName);
+                          Navigator.pushNamed(context, QuestionSelected.routeName);
                           }, 
                       child: const Text("Restart"),
                     ),

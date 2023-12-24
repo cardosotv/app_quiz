@@ -32,16 +32,19 @@ class _QuestionSelected extends State<QuestionSelected> {
             children: [
               GestureDetector(
                 onTap: () => {
+                  questionCubit.close(),
                   Navigator.pushNamed(context, Home.routeName),
                 },
-                child: const Text("quit", 
-                                  style: TextStyle(color: Colors.blue),),
+                child: const Text(
+                  "quit",
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
               BlocBuilder<QuestionCubit, QuestionState>(
                 builder: (context, state) {
                   questionCubit = context.read<QuestionCubit>();
                   return Text(
-                    "${questionCubit.listAnswers.length+1}/10",
+                    "${questionCubit.listAnswers.length + 1}/10",
                     textDirection: TextDirection.ltr,
                     style: const TextStyle(color: Colors.blue),
                   );
@@ -51,16 +54,51 @@ class _QuestionSelected extends State<QuestionSelected> {
             ],
           ),
         ),
-        body: Container(
-                margin: const EdgeInsets.only(top: 50.0),
-                alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height,
-                child: QuestionOptions(),
+        body: Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 50.0),
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height,
+              child: QuestionOptions(),
+            ),
+            Positioned(
+                top: 15,
+                right: (MediaQuery.of(context).size.width / 2) - 40,
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  alignment: Alignment.center,
+                  //padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: const Color.fromARGB(255, 219, 240, 250),
+                    ),
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                child: BlocBuilder<QuestionCubit, QuestionState>(
+                  builder: (context, state) {
+                    return Text(
+                              state.timer.toString().length == 2 ?  
+                              state.timer.toString().substring(0,1) :
+                              '0',
+                              style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold,
+                                ),
+                              );
+                    },
+                  ),
                 ),
-      ),
-    );
-  }
-}
+              ),
+            ],
+          ),
+            ),
+        );
+      }
+    }
+
 
 class ScreenStateControl extends StatelessWidget {
   const ScreenStateControl({super.key});

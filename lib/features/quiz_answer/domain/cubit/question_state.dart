@@ -5,20 +5,33 @@ sealed class QuestionState extends Equatable {
   // final String question;
   // final List<String> options;
   // final String correctAnswer;
+  final int? timer;
+  const QuestionState(this.timer);
   
-  //const QuestionState(this.id, this.question, this.options, this.correctAnswer);
-  const QuestionState();
-
   @override
-  List<Object> get props => [];
+  List<Object> get props => [timer!];
 }
 
-final class QuestionEmpty extends QuestionState {}
+final class QuestionEmpty extends QuestionState {
+  QuestionEmpty() : super(0);
+}
 
-final class QuestionLoading extends QuestionState {}
+final class QuestionLoading extends QuestionState {
+  QuestionLoading() : super(0);
+}
 
-final class QuestionLoaded extends QuestionState {}
+final class QuestionLoaded extends QuestionState {
+  QuestionLoaded() : super(0);
+}
 
-final class QuestionAnswered extends QuestionState {}
+final class QuestionInProgress extends QuestionState {
+  QuestionInProgress(int? timer) : super(timer);
+}
 
-final class QuestionDone extends QuestionState {}
+final class QuestionAnswered extends QuestionState {
+  QuestionAnswered() : super(0);
+}
+
+final class QuestionDone extends QuestionState {
+  QuestionDone() : super(0);
+}

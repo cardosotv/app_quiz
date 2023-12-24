@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_quiz/features/quiz_answer/data/models/question_model.dart';
 import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
 import 'package:bloc/bloc.dart';
@@ -10,6 +12,8 @@ part 'question_state.dart';
 class QuestionCubit extends Cubit<QuestionState> {
   // set up here any var that we have
   Question question = Question();
+  int timeCounter = 100;
+  var oClock;
   List<Answer> listAnswers = [];
   String userAnswer = "";
   var resultMatch = {'score': 0, 
@@ -18,15 +22,16 @@ class QuestionCubit extends Cubit<QuestionState> {
                       'message': ' ',
                       'subMessage': ' '
                     };
-  double matchScore = 0.0;
-  List randomList = indexListQuestion;
+  int matchScore = 0;
+  List randomList = indexListQuestion.toList();
   QuestionCubit() : super(QuestionEmpty());
 
   Future<void> getNextQuestion() async {
 // purpose: return de next question to show for user
 // 1. set a random list
 // 2. remove this index of the random list
-// 3.  delivery the question for the next index of random list 
+// 3. delivery the question for the next index of random list 
+// 4. turn on the clock
     emit(QuestionLoading());
     userAnswer = "";
     List<int> listSuffle = randomList as List<int>; 
@@ -35,6 +40,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     question = QuestionModel().getId(nextIndex);
     randomList.remove(nextIndex);
     emit(QuestionLoaded());
+    setTimer();
   }
 
   Future<void> setOptionSelected(String optionSelected) async {
@@ -46,21 +52,43 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(QuestionAnswered());
   }
 
-  Future<void> setAnswerQuestion({int time = 1}) async {
+  Future<void> setAnswerQuestion() async {
   // purpose: set the user answer identifying if the answer was correct and calculating the score
-  // 1. identifying if the answer was correct
-  // 2. Calculate the score
-  // 3. Register the answer
-
+  // 1. turn off the clock
+  // 2. identifying if the answer was correct
+  // 3. Calculate the score
+  // 4. Register the answer
+    oClock.cancel();
     bool answerCorrect = userAnswer == question.correctAnswer ? true : false;
     listAnswers.add(
       Answer(questionId: question.id,
              answer: userAnswer,
              correctOption: question.correctAnswer,
              correct: answerCorrect,
-             score: answerCorrect ? (50 + (time * 5)) : 0
+             score: answerCorrect ? (50 + (timeCounter * 0.5)).toInt() : 0
              )
     );
+  }
+
+  @override
+  Future<void> close() async {
+    oClock.cancel();
+    super.close();
+  }
+
+  Future<void> setTimer() async{
+    timeCounter = 100;
+    oClock = Timer.periodic(const Duration(milliseconds: 100), (timer) { 
+      if (timeCounter > 0) {
+        print(timeCounter.toString());
+        timeCounter--;
+        emit(QuestionInProgress(timeCounter));
+      }
+      else {
+        emit(QuestionLoaded());
+        timer.cancel();
+      }
+    });
   }
 
   Future<void> calculateQuizScore() async{
@@ -102,7 +130,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     }
     //  'message': ' ',
     //  'color_score': ' '
-    loggedUser.score += loggedUser.score + matchScore.toInt(); 
+    loggedUser.score += matchScore.toInt(); 
   }
 
   Widget widgetResult() {

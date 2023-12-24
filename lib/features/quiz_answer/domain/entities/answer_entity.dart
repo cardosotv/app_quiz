@@ -5,13 +5,13 @@ class Answer extends Equatable {
   final String answer;
   final String correctOption;
   final bool correct;
-  final double score;
+  final int score;
 
   Answer({ this.questionId = 0, 
                this.answer = " ",
         this.correctOption = " " ,
               this.correct = false, 
-                this.score = 0.0,  
+                this.score = 0,  
               });
 
  @override
