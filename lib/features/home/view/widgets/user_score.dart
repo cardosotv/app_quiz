@@ -23,14 +23,18 @@ Widget userScore(String title, User user, {double myWidht = 200, double  myHeigh
           child: Text(
             title, 
             style: const TextStyle(fontWeight: FontWeight.bold,
-                                    fontSize: 24),
+                                    fontSize: 24,
+                                    color: Color.fromARGB(170, 0, 0, 0)),
           ),
           ),
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
               "${loggedUser.score} pts",
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 32,
+                                     fontWeight: FontWeight.bold,
+                                     color: Color.fromARGB(170, 0, 0, 0),
+                                     ),
             ),
           ),
         ],

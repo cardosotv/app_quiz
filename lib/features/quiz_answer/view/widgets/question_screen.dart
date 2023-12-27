@@ -18,7 +18,7 @@ class QuestionOptions extends StatelessWidget {
     
     if(isfristLoad) {
       questionCubit = context.read<QuestionCubit>();
-      questionCubit.getNextQuestion();
+      questionCubit.getNextQuestion(context);
       isfristLoad = false;
     } 
     return Container(
@@ -49,20 +49,20 @@ class QuestionOptions extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: questionCubit.userAnswer == ""
-                        ? null
-                        : () => {
-                              questionCubit.setAnswerQuestion(),
-                              //if (questionCubit.randomList.isNotEmpty){
-                              if (questionCubit.randomList.length > 8) {
-                                questionCubit.getNextQuestion(),
-                              } else {
-                                questionCubit.calculateQuizScore(),
-                                Navigator.pushNamed(context, 
-                                                    '/questionResult',
-                                                    arguments: questionCubit),
-                                questionCubit.close(),
-                              }
-                            },
+                        ? null : () => questionCubit.answerTheQuesion(context),
+                        // : () => {
+                        //       questionCubit.setAnswerQuestion(),
+                        //       //if (questionCubit.randomList.isNotEmpty){
+                        //       if (questionCubit.randomList.length > 8) {
+                        //         questionCubit.getNextQuestion(),
+                        //       } else {
+                        //         questionCubit.calculateQuizScore(),
+                        //         Navigator.pushNamed(context, 
+                        //                             '/questionResult',
+                        //                             arguments: questionCubit),
+                        //         questionCubit.close(),
+                        //       }
+                        //     },
                     child: const Text("Next"),
                   ),
                 ),

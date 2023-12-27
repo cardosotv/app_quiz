@@ -6,10 +6,11 @@ sealed class QuestionState extends Equatable {
   // final List<String> options;
   // final String correctAnswer;
   final int? timer;
-  const QuestionState(this.timer);
+  final Color? timerColor;
+  const QuestionState(this.timer, {this.timerColor = Colors.black54});
   
   @override
-  List<Object> get props => [timer!];
+  List<Object> get props => [timer!, timerColor!];
 }
 
 final class QuestionEmpty extends QuestionState {
@@ -25,7 +26,7 @@ final class QuestionLoaded extends QuestionState {
 }
 
 final class QuestionInProgress extends QuestionState {
-  QuestionInProgress(int? timer) : super(timer);
+  QuestionInProgress(int? timer, Color timerColor) : super(timer, timerColor: timerColor);
 }
 
 final class QuestionAnswered extends QuestionState {

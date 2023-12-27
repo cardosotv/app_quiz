@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:app_quiz/core/data/repositories/global_var.dart';
 import 'package:app_quiz/features/quiz_answer/domain/entities/answer_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 part 'question_state.dart';
 
 class QuestionCubit extends Cubit<QuestionState> {
@@ -26,7 +27,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   List randomList = indexListQuestion.toList();
   QuestionCubit() : super(QuestionEmpty());
 
-  Future<void> getNextQuestion() async {
+  Future<void> getNextQuestion(BuildContext context) async {
 // purpose: return de next question to show for user
 // 1. set a random list
 // 2. remove this index of the random list
@@ -40,7 +41,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     question = QuestionModel().getId(nextIndex);
     randomList.remove(nextIndex);
     emit(QuestionLoaded());
-    setTimer();
+    setTimer(context);
   }
 
   Future<void> setOptionSelected(String optionSelected) async {
@@ -70,26 +71,52 @@ class QuestionCubit extends Cubit<QuestionState> {
     );
   }
 
+  // purpose: turn off the clock when the object will dispose
+  // 1. turn off the clock
   @override
   Future<void> close() async {
     oClock.cancel();
     super.close();
   }
 
-  Future<void> setTimer() async{
+  Future<void> setTimer(BuildContext context) async{
+  // purpose: set the countdown for the oclock
+  // 1. turn off the clock
+  // 2. show the timer in red when left 3 seg for the end
+    Color timerColor = Colors.black54;
     timeCounter = 100;
     oClock = Timer.periodic(const Duration(milliseconds: 100), (timer) { 
       if (timeCounter > 0) {
-        print(timeCounter.toString());
         timeCounter--;
-        emit(QuestionInProgress(timeCounter));
+        timerColor = timeCounter >= 30 ? Colors.black54 : Colors.red;
+        emit(QuestionInProgress(timeCounter, timerColor));
       }
       else {
         emit(QuestionLoaded());
         timer.cancel();
+        answerTheQuesion(context);
       }
     });
   }
+
+  Future<void> answerTheQuesion(BuildContext context) async {
+  // purpose: make the actions to answer the question
+  // 1. check if still exist more questions 
+  // 2. set the next question
+  // 3. finish the match when no exist more questions.
+    setAnswerQuestion();
+    //if (randomList.isNotEmpty){
+    if (randomList.length > 8) {
+      getNextQuestion(context);
+    } else {
+      calculateQuizScore();
+      Navigator.pushNamed(context, 
+        '/questionResult',
+        arguments: this);
+      close();
+    }
+  }
+
 
   Future<void> calculateQuizScore() async{
   // purpose: This function should calculate the match score.

@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
 import 'package:app_quiz/features/quiz_answer/view/widgets/question_screen.dart';
+import 'package:app_quiz/features/quiz_answer/view/widgets/question_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/home/view/pages/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,8 +85,10 @@ class _QuestionSelected extends State<QuestionSelected> {
                               state.timer.toString().length == 2 ?  
                               state.timer.toString().substring(0,1) :
                               '0',
-                              style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold,
+                              style: TextStyle(
+                                fontSize: 24, 
+                                fontWeight: FontWeight.bold,
+                                color: state.timerColor,
                                 ),
                               );
                     },
