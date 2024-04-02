@@ -9,9 +9,9 @@ Widget userScore(String title, User user, {double myWidht = 200, double  myHeigh
     alignment: Alignment.centerLeft,
     
     decoration: const BoxDecoration(
-     // color: Color.fromARGB(255, 223, 241, 250),
-    //                           border: Border.all(width: 2, color: Colors.grey),
-    //                           borderRadius: BorderRadius.circular(10),
+    //  color: Color.fromARGB(255, 223, 241, 250),
+    //   border: Border.all(width: 2, color: Colors.grey),
+    //   borderRadius: BorderRadius.circular(10),
                 ),
     child: Padding(
       padding: const EdgeInsets.all(8.0),

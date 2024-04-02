@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color.fromRGBO(33, 150, 243, 1),
         title: const Text(
           "Quiz IA",
-          style: TextStyle(fontSize: 16, 
+          style: TextStyle(fontSize: 20, 
                            color: Colors.white,
                            fontWeight: FontWeight.bold
                            ),
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
               Card(
                 elevation: 1,
                 margin: const EdgeInsets.only(top:15, bottom: 15),
-                child: userScore("Score: ", loggedUser, myWidht: maxWidth-20),
+                child: userScore(" Score", loggedUser, myWidht: maxWidth-20),
                 ),
             ],
           ),
