@@ -1,7 +1,7 @@
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
-import 'package:app_quiz/features/quiz_answer/view/pages/quiz_question.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/pages/quiz_question.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/home/view/pages/home.dart';
+import 'package:app_quiz/features/home/presentation/pages/home.dart';
 
 class QuestionResult extends StatefulWidget {
   static const routeName = '/questionResult';

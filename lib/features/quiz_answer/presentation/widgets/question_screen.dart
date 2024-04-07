@@ -1,6 +1,6 @@
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/quiz_answer/view/widgets/question.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/widgets/question.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 

@@ -1,12 +1,21 @@
-import 'package:app_quiz/features/quiz_answer/view/pages/quiz_question.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/pages/quiz_question.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/quiz_answer/view/pages/quiz_result.dart';
-import 'package:app_quiz/features/quiz_answer/view/pages/quiz_start.dart';
-import 'package:app_quiz/features/home/view/pages/home.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/pages/quiz_result.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/pages/quiz_start.dart';
+import 'package:app_quiz/features/home/presentation/pages/home.dart';
+import 'package:app_quiz/features/login/presentation/pages/login.dart';
+import 'package:provider/provider.dart';
+import 'package:app_quiz/features/login/presentation/providers/token_provider.dart';
+
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (context) => TokenProvider(),
+        child: const MyApp(),
+      ),
+    );
 }
 
 class MyApp extends StatefulWidget {
@@ -20,8 +29,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute: Home.routeName,
+        initialRoute: Login.routeName,
         routes: {
+          Login.routeName:(context) => const Login(),
           Home.routeName: (context) => const Home(),
           QuizMainQuestion.routeName: (context) => const QuizMainQuestion(),
           '/questionResult': (context) => const QuestionResult(),

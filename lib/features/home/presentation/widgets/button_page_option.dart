@@ -1,7 +1,6 @@
 import 'package:app_quiz/features/home/domain/entities/entity_subjects.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/core/domain/use_cases/utils.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 Widget buttonPageOption (Subject option, BuildContext context, { double myWidth = 100, double myHeight = 100 }){
   print(option.icon);

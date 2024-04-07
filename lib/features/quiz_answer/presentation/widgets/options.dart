@@ -3,17 +3,17 @@ import 'package:app_quiz/core/data/repositories/global_var.dart';
 
 
 
-class widgetOptions extends StatefulWidget {
+class WidgetOptions extends StatefulWidget {
   final List<String> options;
   final String optionCorret;
 
-  const widgetOptions(this.options, this.optionCorret, {super.key});
+  const WidgetOptions(this.options, this.optionCorret, {super.key});
 
   @override
-  State<widgetOptions> createState() => _widgetOptionsState();
+  State<WidgetOptions> createState() => _WidgetOptionsState();
 }
 
-class _widgetOptionsState extends State<widgetOptions> {
+class _WidgetOptionsState extends State<WidgetOptions> {
   String? _optionSelect = " ";
 
   @override

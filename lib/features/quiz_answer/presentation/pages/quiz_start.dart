@@ -1,13 +1,7 @@
 import 'package:app_quiz/features/home/domain/entities/entity_subjects.dart';
-import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
-import 'package:app_quiz/features/quiz_answer/view/pages/quiz_question.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/pages/quiz_question.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
-import 'package:app_quiz/features/quiz_answer/domain/models/quiz.dart';
-import 'package:app_quiz/core/data/repositories/global_var.dart';
-import 'dart:math';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class QuizMainQuestion extends StatefulWidget {
   static const routeName = '/quiz';

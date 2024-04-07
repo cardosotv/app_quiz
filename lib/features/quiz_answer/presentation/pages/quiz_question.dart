@@ -1,10 +1,10 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'dart:async';
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
-import 'package:app_quiz/features/quiz_answer/view/widgets/question_screen.dart';
-import 'package:app_quiz/features/quiz_answer/view/widgets/question_timer.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/widgets/question_screen.dart';
+import 'package:app_quiz/features/quiz_answer/presentation/widgets/question_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/home/view/pages/home.dart';
+import 'package:app_quiz/features/home/presentation/pages/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class QuestionSelected extends StatefulWidget {

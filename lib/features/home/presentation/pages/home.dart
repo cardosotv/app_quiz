@@ -1,7 +1,9 @@
+import 'package:app_quiz/features/login/presentation/providers/token_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/features/home/view/widgets/option_subjects.dart';
+import 'package:app_quiz/features/home/presentation/widgets/option_subjects.dart';
 import 'package:app_quiz/core/domain/models/user.dart';
 import '../widgets/user_score.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   static const routeName = '/';
@@ -16,9 +18,10 @@ class _HomeState extends State<Home> {
   int _bottomBarIndex = 0;
   User loggedUser = User();
 
-
   @override
   Widget build(BuildContext context) {
+    final TokenProvider tokenProvider = Provider.of<TokenProvider>(context);
+    final token = tokenProvider.token;
     // get to maximus of width screen
     double maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -58,7 +61,8 @@ class _HomeState extends State<Home> {
                   width: maxWidth,
                   height: 100,
                   color: Colors.grey,
-                  child: const Text("Banner Google ADS"),
+                  // child: const Text("Banner Google ADS"),
+                  child: Text(token.toString()),
                 ),
               ),
             ],
