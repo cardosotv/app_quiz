@@ -75,7 +75,6 @@ class _HomeState extends State<Home> {
           onTap: (index) {
             setState(() {
               _bottomBarIndex = index;
-              print("pressioned option $index");
             });
           },
           items: const [

@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class Subject extends Equatable {
-    final int id;
-    final String subject;
-    final String about;
-    final int icon;
+    int id;
+    String subject;
+    String about;
+    int icon;
 
     Subject({
       this.id = 0,
@@ -15,4 +15,11 @@ class Subject extends Equatable {
 
   @override
   List<Object> get props => [id, subject, about, icon];
+
+  fromJson(Map<String, dynamic> item){
+    this.id = item['id'];
+    this.subject = item['name'];
+    this.about = item['about'];
+    this.icon = item['icon'];
+  }
 }

@@ -5,6 +5,7 @@ import 'package:app_quiz/features/home/presentation/widgets/button_page_option.d
 
 Widget optionSubject(BuildContext context) {
   
+  // implements here the call for the quiz api
   List<Subject> listSubjects = UseCasesSubjects().getAllSubjects();
 
   return GridView.count(

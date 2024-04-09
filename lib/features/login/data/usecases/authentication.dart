@@ -11,7 +11,6 @@ class Authentication implements AuthenticationRepository{
     Future<Map<String?, dynamic>> authenticate(String user) async{
 
         final String apiUrl = 'http://localhost:8080/api/auth';
-        // final Map<String, String> headers = { "userId" = user };
 
         try {
           // final response = await http.get(Uri.parse(apiUrl, headers: headers));

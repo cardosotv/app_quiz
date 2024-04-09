@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:app_quiz/core/domain/use_cases/utils.dart';
 
 Widget buttonPageOption (Subject option, BuildContext context, { double myWidth = 100, double myHeight = 100 }){
-  print(option.icon);
   return GestureDetector(
     onTap: () {
       Navigator.pushNamed(context, '/quiz', arguments: option);
@@ -25,7 +24,6 @@ Widget buttonPageOption (Subject option, BuildContext context, { double myWidth 
             children: [
               Icon( 
                 IconData(option.icon, fontFamily: 'MaterialIcons'),
-                //option.subject == "Science" ? Icons.science : Icons.person_2,
                 color: Colors.blue,
                 size: 36,
                 ),
