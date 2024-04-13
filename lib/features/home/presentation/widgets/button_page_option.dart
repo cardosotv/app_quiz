@@ -15,15 +15,11 @@ Widget buttonPageOption (Subject option, BuildContext context, { double myWidth 
           padding: const EdgeInsets.all(8.0),
           width: myWidth,
           height: myHeight,
-          // decoration: BoxDecoration(
-          //   border: Border.all(width: 1, color: const Color.fromARGB(255, 219, 240, 250),),
-          //   borderRadius: BorderRadius.circular(10),
-          //   ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon( 
-                IconData(option.icon, fontFamily: 'MaterialIcons'),
+              const Icon( 
+                IconData(0xe7fd, fontFamily: 'MaterialIcons'),
                 color: Colors.blue,
                 size: 36,
                 ),
@@ -31,7 +27,10 @@ Widget buttonPageOption (Subject option, BuildContext context, { double myWidth 
                 alignment: AlignmentDirectional.bottomCenter,
                 child: Text(
                   option.subject,
-                  style: const TextStyle(fontSize: 12, color: Color.fromARGB(137, 10, 9, 9)),
+                  style: const TextStyle(fontSize: 12, 
+                                  color: Color.fromARGB(137, 10, 9, 9),
+                                  fontWeight: FontWeight.bold
+                              ),
                 ),
               ),
             ],

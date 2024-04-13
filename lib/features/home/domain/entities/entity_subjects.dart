@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class Subject extends Equatable {
-    int id;
+    String id;
     String subject;
     String about;
-    int icon;
+    String icon;
 
     Subject({
-      this.id = 0,
+      this.id = "",
       this.subject = " ",
       this.about = " ",
-      this.icon = 0,
+      this.icon = "",
   });
 
   @override

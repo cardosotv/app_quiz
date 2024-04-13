@@ -1,13 +1,12 @@
 import 'package:app_quiz/features/home/domain/entities/entity_subjects.dart';
-import 'package:app_quiz/features/home/domain/use_cases/uc_subjects.dart';
+
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/home/presentation/widgets/button_page_option.dart';
 
-Widget optionSubject(BuildContext context) {
-  
-  // implements here the call for the quiz api
-  List<Subject> listSubjects = UseCasesSubjects().getAllSubjects();
 
+
+Widget optionSubject(BuildContext context, List<Subject> listSubjects) {
+  
   return GridView.count(
     scrollDirection: Axis.vertical,
     shrinkWrap: true,

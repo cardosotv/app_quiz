@@ -34,8 +34,8 @@ class _QuizMainQuestionState extends State<QuizMainQuestion> {
                   height: 150,
                   child: Column(
                     children: [
-                      Icon( 
-                        IconData(parameters.icon, fontFamily: "MaterialIcons"),
+                      const Icon( 
+                        IconData(0xe7fd, fontFamily: "MaterialIcons"),
                         color: Colors.blue,
                         size: 82,
                       ),

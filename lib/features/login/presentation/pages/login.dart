@@ -63,8 +63,9 @@ void _login(BuildContext context) {
     if (token.isNotEmpty && token.containsKey('token')) {
       // Update the token to provider session
       tokenProvider.setToken(token['token']);
-      // Call the home screen
-      Navigator.pushNamed(context, Home.routeName);
+      // Call the home screen 
+      Navigator.pushNamed(context, '/home');
+      // Navigator.pushNamed(context, Home.routeName);
     } else if (token.isNotEmpty && token.containsKey('error')) {
         // Map<String, dynamic> er = jsonDecode(token['error']);
         Error er = Error();

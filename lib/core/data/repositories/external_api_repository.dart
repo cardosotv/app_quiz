@@ -1,5 +1,5 @@
 
 
 abstract class ExternalApiRepository {
-  Map<String, dynamic> execute(String token, String url);
+  Future<Map<String?, dynamic>> execute(String token, String url);
 }
