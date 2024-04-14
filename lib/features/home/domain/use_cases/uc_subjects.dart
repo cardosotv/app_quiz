@@ -32,22 +32,3 @@ class UseCasesSubjects {
     return listSubjects;
   }
 }
-
-
-
-
-
-
-// List<Subject>? getAllSubjects(String token) {
-
-//     SubjectRepository subjectRepository = new SubjectRepository();
-//     List<Subject>? listSubjects;
-
-//     try {
-//        listSubjects = subjectRepository.getAllSubjects(token);
-
-//     } catch (e) {
-//         throw Exception('Failed to list the Subjects.');
-//     }
-//     return listSubjects;
-// }

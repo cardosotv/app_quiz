@@ -1,8 +1,8 @@
 import 'package:app_quiz/core/data/repositories/global_var.dart';
 import 'package:flutter/material.dart';
-import 'package:app_quiz/core/domain/models/user.dart';
+import 'package:app_quiz/features/user/domain/user_entity.dart';
 
-Widget userScore(String title, User user, {double myWidht = 200, double  myHeight = 150}) {
+Widget userScore(String title, User? user, {double myWidht = 200, double  myHeight = 150}) {
   return Container(
     width: myWidht,
     height: myHeight-5,

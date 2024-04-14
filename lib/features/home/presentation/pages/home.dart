@@ -4,7 +4,8 @@ import 'package:app_quiz/features/home/domain/use_cases/uc_subjects.dart';
 import 'package:app_quiz/features/login/presentation/providers/token_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/home/presentation/widgets/option_subjects.dart';
-import 'package:app_quiz/core/domain/models/user.dart';
+import 'package:app_quiz/core/domain/models/user.dart' as UserOld;
+import 'package:app_quiz/features/user/domain/user_entity.dart' as UserEntity;
 import '../widgets/user_score.dart';
 import 'package:provider/provider.dart';
 
@@ -19,12 +20,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _bottomBarIndex = 0;
-  User loggedUser = User();
 
   @override
   Widget build(BuildContext context) {
     final TokenProvider tokenProvider = Provider.of<TokenProvider>(context);
     final token = tokenProvider.token.toString();
+    UserEntity.User? user = tokenProvider.userLogged;
     UseCasesSubjects subjectUseCase = UseCasesSubjects();
     String url = "http://localhost:8080/api/v1/subjects";
     ExternalApi externalApi = ExternalApi();
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> {
               if (snapshot.data != null && snapshot.data.length != 0) {
                 List<Subject> listSubjects =
                     subjectUseCase.getAllSubjects(snapshot.data);
-                return _Home(context, listSubjects);
+                return _Home(context, listSubjects, user);
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
@@ -78,7 +79,7 @@ class _HomeState extends State<Home> {
             }));
   }
 
-  Widget _Home(BuildContext context, var listSubjects) {
+  Widget _Home(BuildContext context, var listSubjects, UserEntity.User? user) {
     double maxWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
@@ -90,7 +91,7 @@ class _HomeState extends State<Home> {
                 Card(
                   elevation: 1,
                   margin: const EdgeInsets.only(top: 15, bottom: 15),
-                  child: userScore(" Score", loggedUser, myWidht: maxWidth - 20),
+                  child: userScore(" Score", user, myWidht: maxWidth - 20),
                 ),
               ],
             ),
@@ -106,7 +107,7 @@ class _HomeState extends State<Home> {
                     height: 100,
                     color: Colors.grey,
                     // child: const Text("Banner Google ADS"),
-                    child: const Text('Banner'),
+                    child: Text('User: ${user?.name}'),
                   ),
                 ),
               ],

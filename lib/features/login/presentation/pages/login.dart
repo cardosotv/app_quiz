@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:app_quiz/features/home/presentation/pages/home.dart';
 import 'package:app_quiz/features/login/data/usecases/authentication.dart';
 import 'package:app_quiz/features/login/domain/usecases/login_uc.dart';
+import 'package:app_quiz/features/user/domain/user_entity.dart';
+import 'package:app_quiz/features/user/domain/user_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_quiz/core/domain/models/error.dart';
@@ -33,36 +35,19 @@ class _LoginState extends State<Login> {
   }
 }
 
-// In charge of show the error message on  screen
-// by Tiago Cardoso at 07/04/2024
-// class loginDialog extends StatelessWidget {
-//   const loginDialog({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: ElevatedButton(
-//          onPressed: () { 
-//             _login(context);
-//             // Navigator.pushNamed(context, Home.routeName);
-//           },
-//           child: const Text('Login'),
-//         )
-//       ),
-//     );
-//   }
-// }
-
 void _login(BuildContext context) {
   final tokenProvider = Provider.of<TokenProvider>(context, listen: false);
   Authentication authenticationRepository = Authentication();
-  LoginUseCase login = LoginUseCase(authenticationRepository);
+  LoginUseCase loginUseCase = LoginUseCase(authenticationRepository);
+  bool isLogged = false;
+  UserUseCase userUseCase = UserUseCase();
 
-  login.execute("cce99011-cfee-4759-b5e4-e6d085753f71").then((token) {
+  // loginUseCase.execute("cce99011-cfee-4759-b5e4-e6d085753f71").then((token) {
+  loginUseCase.execute("cce99011-cfee-4759-b5e4-e6d085753f71").then((token) {
     if (token.isNotEmpty && token.containsKey('token')) {
       // Update the token to provider session
       tokenProvider.setToken(token['token']);
+      isLogged = true;
       // Call the home screen 
       Navigator.pushNamed(context, '/home');
       // Navigator.pushNamed(context, Home.routeName);
@@ -77,6 +62,13 @@ void _login(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
             snackBarCustom(context, '$error')
       );
+  }).whenComplete(() {
+    if (isLogged == true) {
+      User user = userUseCase
+        .getUserByID(tokenProvider.userID.toString()
+                    , tokenProvider.token.toString());
+      print(user.name.toString());
+    }
   });
 }
 
