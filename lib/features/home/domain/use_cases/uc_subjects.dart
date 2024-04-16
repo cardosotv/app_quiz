@@ -7,9 +7,9 @@ class UseCasesSubjects {
   UseCasesSubjects();
 
   List<Subject> getAllSubjects(var json) {
-  
+    
     List<Subject> listSubjects = [];
-  
+
     try {
       if (json.containsKey('result')) {
         if (json['result'] != null) {

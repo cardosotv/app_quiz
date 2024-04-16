@@ -4,7 +4,6 @@ import 'package:app_quiz/features/home/domain/use_cases/uc_subjects.dart';
 import 'package:app_quiz/features/login/presentation/providers/token_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/home/presentation/widgets/option_subjects.dart';
-import 'package:app_quiz/core/domain/models/user.dart' as UserOld;
 import 'package:app_quiz/features/user/domain/user_entity.dart' as UserEntity;
 import '../widgets/user_score.dart';
 import 'package:provider/provider.dart';

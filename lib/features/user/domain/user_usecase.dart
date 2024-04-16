@@ -1,25 +1,23 @@
 
+import 'dart:async';
 
-import 'package:app_quiz/features/login/presentation/providers/token_provider.dart';
 import 'package:app_quiz/features/user/domain/user_entity.dart';
 import 'package:app_quiz/features/user/data/user_repository.dart';
 
-
 class UserUseCase{
-  User getUserByID(String id, String token){
+  
+  Future<User?> getUserByID(String id, String token) async{
     // Initiate the User for return 
     User user = User();
 
     // Request the user to repository 
     UserRepository userRepository = UserRepository();
-    userRepository.getUserByIDfromAPI(id, token).whenComplete(() => user);
-
-    // Check if the result is not null or valid
-    if (user == null) {
-      throw Exception('User requested has beer returned null!');
-    }
+    user = await userRepository.getUserByIDfromAPI(id, token)
     
-    // Return the result for the requeste
+    // Treat the error if exists
+    .catchError((error) {
+      throw Exception('The get user has failed! ${error.toString()}');
+    });
     return user;
   }
 }

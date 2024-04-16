@@ -64,10 +64,12 @@ void _login(BuildContext context) {
       );
   }).whenComplete(() {
     if (isLogged == true) {
-      User user = userUseCase
-        .getUserByID(tokenProvider.userID.toString()
-                    , tokenProvider.token.toString());
-      print(user.name.toString());
+      User user = User();
+      userUseCase.getUserByID(tokenProvider.userID.toString()
+                    , tokenProvider.token.toString())
+        .then((user) {
+            tokenProvider.setUserLogged(user);
+        });
     }
   });
 }

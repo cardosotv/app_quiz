@@ -30,7 +30,7 @@ Widget userScore(String title, User? user, {double myWidht = 200, double  myHeig
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: Text(
-              "${loggedUser.score} pts",
+              "${user?.score.toString()} pts",
               style: const TextStyle(fontSize: 32,
                                      fontWeight: FontWeight.bold,
                                      color: Color.fromARGB(170, 0, 0, 0),
