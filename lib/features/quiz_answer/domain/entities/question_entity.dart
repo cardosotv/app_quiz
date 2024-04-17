@@ -1,17 +1,31 @@
 import "package:equatable/equatable.dart";
 
 class Question extends Equatable {
-  final int id;
-  final String question;
-  final List<String> options;
-  final String correctAnswer;
+  String? _id;
+  String? _question;
+  List<String>? _options;
+  String? _correctAnswer;
 
-  Question(
-      {this.id = 0,
-      this.question = " ",
-      this.options = const [],
-      this.correctAnswer = " "});
+  String? get id => _id;
+  String? get question => _question;
+  List<String>? get options => _options;
+  String? get correctAnswer => _correctAnswer;
+
+  Question();
 
   @override
-  List<Object> get props => [id, question, options, correctAnswer];
+  List<Object?> get props => [id, question, options, correctAnswer];
+
+  void fromJson(Map<String?, dynamic> decodedQuestion){
+
+    _options = [];
+    for(var item in decodedQuestion['options']){
+      _options!.add(item['option'].toString());
+      if(item['isCorrect'] == true){
+        _correctAnswer = item['option'].toString();
+      }
+    }
+    _id = decodedQuestion['id'];
+    _question = decodedQuestion['question'];
+  }
 }

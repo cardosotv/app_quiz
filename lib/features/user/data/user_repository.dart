@@ -20,7 +20,7 @@ class UserRepository{
     // Call the External Api Method
     var response;
     await externalApi
-      .execute(token, url+id)
+      .getExecute(token, url+id)
       .then((result) => response = result)
       .whenComplete(() {
         // Convert the result json to  user entity 

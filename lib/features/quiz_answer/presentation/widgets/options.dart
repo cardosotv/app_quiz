@@ -78,8 +78,6 @@ class _WidgetOptionsState extends State<WidgetOptions> {
             ElevatedButton(
               onPressed: _optionSelect == " " ? null : (){ 
                 setState(() {
-                  print('Correct: $optionCorret');
-                  print('Selected: $_optionSelect');
                   if(optionCorret == _optionSelect) { 
                     isCorrect = true;
                     answer['answer'] = optionSelected;

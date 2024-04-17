@@ -63,8 +63,8 @@ class _HomeState extends State<Home> {
               ),
             ]),
         body: FutureBuilder(
-            // future: subjectUseCase.getAllSubjects(token) as Future<dynamic>?,
-            future: externalApi.execute(token, url),
+            // future: subjectUseCase.getAllSubjects(token) as Future<dynamic>?, 
+            future: externalApi.getExecute(token, url),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.data != null && snapshot.data.length != 0) {
                 List<Subject> listSubjects =

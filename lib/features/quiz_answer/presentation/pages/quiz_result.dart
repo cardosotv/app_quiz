@@ -23,7 +23,7 @@ class _QuestionResultState extends State<QuestionResult> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.blue,
-        title: const Text('Quiz IA', 
+        title: const Text('Quiz AI', 
                 textDirection: TextDirection.ltr,
                 style: TextStyle(color: Colors.white,
                 fontWeight: FontWeight.bold),
@@ -95,7 +95,7 @@ class _QuestionResultState extends State<QuestionResult> {
                    height: 50,
                     child: ElevatedButton(
                       onPressed: () { 
-                          Navigator.pushNamed(context, Home.routeName);
+                          Navigator.pushNamed(context, "/home");
                           }, 
                       child: const Text("Home"),
                     ),

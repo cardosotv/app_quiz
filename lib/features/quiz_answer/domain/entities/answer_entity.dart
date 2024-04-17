@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class Answer extends Equatable {
-  final int questionId;
+  final String questionId;
   final String answer;
   final String correctOption;
   final bool correct;
   final int score;
 
-  Answer({ this.questionId = 0, 
+  Answer({ this.questionId = " ", 
                this.answer = " ",
         this.correctOption = " " ,
               this.correct = false, 

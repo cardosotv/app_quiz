@@ -13,6 +13,7 @@ part 'question_state.dart';
 class QuestionCubit extends Cubit<QuestionState> {
   // set up here any var that we have
   Question question = Question();
+  List<Question> listQuestions = [];
   int timeCounter = 100;
   var oClock;
   List<Answer> listAnswers = [];
@@ -25,22 +26,25 @@ class QuestionCubit extends Cubit<QuestionState> {
                     };
   int matchScore = 0;
   List randomList = indexListQuestion.toList();
+  
   QuestionCubit() : super(QuestionEmpty());
 
-  Future<void> getNextQuestion(BuildContext context) async {
+  Future<void> getNextQuestion(BuildContext context, {List<Question>? questions}) async {
 // purpose: return de next question to show for user
-// 1. set a random list
-// 2. remove this index of the random list
-// 3. delivery the question for the next index of random list 
-// 4. turn on the clock
+// 0. Set the status to Loading
+// 1. get the first question of the list 
+// 2. set it for the game
+// 3. remove it from the questions list
+// 4. update the status to Loaded
     emit(QuestionLoading());
+    if (questions != null){
+      listQuestions = questions;
+    }
     userAnswer = "";
-    List<int> listSuffle = randomList as List<int>; 
-    listSuffle.shuffle();
-    int nextIndex = listSuffle[0];
-    question = QuestionModel().getId(nextIndex);
-    randomList.remove(nextIndex);
+    question = listQuestions[0];
+    listQuestions.remove(question);
     emit(QuestionLoaded());
+    listQuestions.length;
     setTimer(context);
   }
 
@@ -62,9 +66,9 @@ class QuestionCubit extends Cubit<QuestionState> {
     oClock.cancel();
     bool answerCorrect = userAnswer == question.correctAnswer ? true : false;
     listAnswers.add(
-      Answer(questionId: question.id,
+      Answer(questionId: question.id!,
              answer: userAnswer,
-             correctOption: question.correctAnswer,
+             correctOption: question.correctAnswer!,
              correct: answerCorrect,
              score: answerCorrect ? (50 + (timeCounter * 0.5)).toInt() : 0
              )
@@ -106,7 +110,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   // 3. finish the match when no exist more questions.
     setAnswerQuestion();
     //if (randomList.isNotEmpty){
-    if (randomList.length > 8) {
+    if (listQuestions.isNotEmpty) {
       getNextQuestion(context);
     } else {
       calculateQuizScore();

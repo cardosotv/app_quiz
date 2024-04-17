@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 import 'dart:async';
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
+import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
 import 'package:app_quiz/features/quiz_answer/presentation/widgets/question_screen.dart';
 import 'package:app_quiz/features/quiz_answer/presentation/widgets/question_timer.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class _QuestionSelected extends State<QuestionSelected> {
 
   @override
   Widget build(BuildContext context) {
+    var game = ModalRoute.of(context)!.settings.arguments as Map<String?, dynamic>;
     return BlocProvider(
       create: (context) => QuestionCubit(),
       child: Scaffold(
@@ -34,7 +36,8 @@ class _QuestionSelected extends State<QuestionSelected> {
               GestureDetector(
                 onTap: () => {
                   questionCubit.close(),
-                  Navigator.pushNamed(context, Home.routeName),
+                  Navigator.pushNamed(context, "/home"),
+                  // Navigator.pushNamed(context, Home.routeName),
                 },
                 child: const Text(
                   "quit",
@@ -61,47 +64,46 @@ class _QuestionSelected extends State<QuestionSelected> {
               margin: const EdgeInsets.only(top: 50.0),
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.height,
-              child: QuestionOptions(),
+              child: QuestionOptions(game),
             ),
             Positioned(
-                top: 15,
-                right: (MediaQuery.of(context).size.width / 2) - 40,
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  alignment: Alignment.center,
-                  //padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 3,
-                      color: const Color.fromARGB(255, 219, 240, 250),
-                    ),
-                    shape: BoxShape.circle,
-                    color: Colors.white,
+              top: 15,
+              right: (MediaQuery.of(context).size.width / 2) - 40,
+              child: Container(
+                width: 80,
+                height: 80,
+                alignment: Alignment.center,
+                //padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 3,
+                    color: const Color.fromARGB(255, 219, 240, 250),
                   ),
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
                 child: BlocBuilder<QuestionCubit, QuestionState>(
                   builder: (context, state) {
                     return Text(
-                              state.timer.toString().length == 2 ?  
-                              state.timer.toString().substring(0,1) :
-                              '0',
-                              style: TextStyle(
-                                fontSize: 24, 
-                                fontWeight: FontWeight.bold,
-                                color: state.timerColor,
-                                ),
-                              );
-                    },
-                  ),
+                      state.timer.toString().length == 2
+                          ? state.timer.toString().substring(0, 1)
+                          : '0',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: state.timerColor,
+                      ),
+                    );
+                  },
                 ),
               ),
-            ],
-          ),
             ),
-        );
-      }
-    }
-
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class ScreenStateControl extends StatelessWidget {
   const ScreenStateControl({super.key});

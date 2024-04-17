@@ -8,11 +8,14 @@ class QuestionModel extends Question  {
     List<Question> result = [];
 
     for (var item in list) {
-      result.add(Question(
-          id: item['id'],
-          question: item['question'],
-          options: item['options'],
-          correctAnswer: item['correct_answer']));
+      Question questionItem = Question();
+      questionItem.fromJson(item);
+      result.add(questionItem);
+      // result.add(Question(
+      //     id: item['id'],
+      //     question: item['question'],
+      //     options: item['options'],
+      //     correctAnswer: item['correct_answer']));
     }
     return result;
   }

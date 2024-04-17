@@ -11,7 +11,7 @@ class SubjectRepository {
       List<Subject> listSubjects = [];
       
       try {
-        ExternalApi().execute(token, url).then((result) {
+        ExternalApi().getExecute(token, url).then((result) {
       
           if (result.containsKey('result')) {
             if (result['result'] != null) {

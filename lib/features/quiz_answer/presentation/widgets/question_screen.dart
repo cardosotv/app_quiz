@@ -1,24 +1,34 @@
+import 'package:app_quiz/features/quiz_answer/domain/usecases/question_usecase.dart';
 import 'package:app_quiz/features/quiz_answer/domain/cubit/question_cubit.dart';
+import 'package:app_quiz/features/quiz_answer/domain/entities/question_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:app_quiz/features/quiz_answer/presentation/widgets/question.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class QuestionOptions extends StatelessWidget {
-  QuestionOptions({super.key});
+
+  final Map<String?, dynamic> game;
+  QuestionOptions(this.game, {super.key});
   //Question question = QuestionCubit().question;
   //final String _optionSelect = "";
+  final QuestionUseCase questionUseCase = QuestionUseCase();
   bool isfristLoad = true;
   var questionCubit = QuestionCubit(); 
+  var parameters;
 
   @override
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-    
+
     if(isfristLoad) {
+      // parameters = ModalRoute.of(context)!.settings.arguments as Future<List<Question>?>;
       questionCubit = context.read<QuestionCubit>();
-      questionCubit.getNextQuestion(context);
+
+      List<Question> questions = questionUseCase.extractQuestionListFromGame(game);
+
+      questionCubit.getNextQuestion(context, questions: questions);
       isfristLoad = false;
     } 
     return Container(
@@ -34,7 +44,7 @@ class QuestionOptions extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.center,
-                child:  widgetQuestion(questionCubit.question.question,
+                child:  widgetQuestion(questionCubit.question.question!,
                         myWidht: maxWidth - 50, myHeight: 180),
               ),
               Container(
@@ -50,19 +60,6 @@ class QuestionOptions extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: questionCubit.userAnswer == ""
                         ? null : () => questionCubit.answerTheQuesion(context),
-                        // : () => {
-                        //       questionCubit.setAnswerQuestion(),
-                        //       //if (questionCubit.randomList.isNotEmpty){
-                        //       if (questionCubit.randomList.length > 8) {
-                        //         questionCubit.getNextQuestion(),
-                        //       } else {
-                        //         questionCubit.calculateQuizScore(),
-                        //         Navigator.pushNamed(context, 
-                        //                             '/questionResult',
-                        //                             arguments: questionCubit),
-                        //         questionCubit.close(),
-                        //       }
-                        //     },
                     child: const Text("Next"),
                   ),
                 ),
@@ -74,7 +71,7 @@ class QuestionOptions extends StatelessWidget {
     );
   }
 
-  Widget _widgetOptions(BuildContext context, List<String> options) {
+  Widget _widgetOptions(BuildContext context, List<String>? options) {
     final questionCubit = context.read<QuestionCubit>();
     options = questionCubit.question.options;
     return BlocConsumer<QuestionCubit, QuestionState>(
@@ -88,10 +85,10 @@ class QuestionOptions extends StatelessWidget {
           child: ListView.builder(
               scrollDirection: Axis.vertical,
                    shrinkWrap: true,
-                    itemCount: options.length,
+                    itemCount: options!.length,
                     itemBuilder: (_, index) {
                       return Card(
-                        elevation: options[index] == questionCubit.userAnswer ?
+                        elevation: options![index] == questionCubit.userAnswer ?
                                     2 : 0.5,
                         color: options[index] == questionCubit.userAnswer ?
                              const Color.fromARGB(255, 223, 241, 250): 
@@ -99,7 +96,7 @@ class QuestionOptions extends StatelessWidget {
                         child: ListTile( 
                           title: Text(options[index]),
                           onTap: (){
-                            questionCubit.setOptionSelected(options[index]);
+                            questionCubit.setOptionSelected(options![index]);
                           },
                         ),
                       );
